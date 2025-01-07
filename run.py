@@ -52,8 +52,6 @@ def generate_room_code():
 with app.app_context():
     db.create_all()  # Crée toutes les tables si elles n'existent pas
 # Créer la base de données et les tables
-with app.app_context():
-    db.create_all()  # Crée toutes les tables si elles n'existent pas
 
 
 
