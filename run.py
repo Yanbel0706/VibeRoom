@@ -51,9 +51,53 @@ def generate_room_code():
 # Créer la base de données et les tables
 with app.app_context():
     db.create_all()  # Crée toutes les tables si elles n'existent pas
-# Créer la base de données et les tables
+@app.route('/')
+def index():
+    return redirect(url_for('login'))  # Redirection vers la page de création/join de room
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Vérifier si l'utilisateur existe déjà
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Cet utilisateur existe déjà !', 'danger')
+            return redirect(url_for('signup'))
+
+        # Hacher le mot de passe
+        hashed_password = generate_password_hash(password)
+
+        # Créer un nouvel utilisateur
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Inscription réussie ! Vous pouvez vous connecter maintenant.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('signup.html')
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Trouver l'utilisateur
+        user = User.query.filter_by(username=username).first()
+
+        if user and check_password_hash(user.password, password):
+            session['user_id'] = user.id
+            flash('Connexion réussie !', 'success')
+            return redirect(url_for('create_or_join_room'))
+        else:
+            flash('Nom d\'utilisateur ou mot de passe incorrect', 'danger')
+
+    return render_template('login.html')
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
