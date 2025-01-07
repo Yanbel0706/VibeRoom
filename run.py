@@ -31,6 +31,26 @@ class Message(db.Model):
     content = db.Column(db.String(500), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+# Modèle pour les rooms
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(4), unique=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    users = db.relationship('User', secondary='room_user', backref='rooms_in_user', lazy='subquery')
+
+class RoomUser(db.Model):
+    __tablename__ = 'room_user'
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    joined_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+# Générer un code de room aléatoire
+def generate_room_code():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+
+# Créer la base de données et les tables
+with app.app_context():
+    db.create_all()  # Crée toutes les tables si elles n'existent pas
 # Créer la base de données et les tables
 with app.app_context():
     db.create_all()  # Crée toutes les tables si elles n'existent pas
