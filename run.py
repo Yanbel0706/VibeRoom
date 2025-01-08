@@ -116,6 +116,51 @@ def chat(room_code):
     else:
         flash('Room not found', 'danger')
         return redirect(url_for('create_or_join_room'))
+@app.route('/create_or_join_room', methods=['GET', 'POST'])
+def create_or_join_room():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user = User.query.get(session['user_id'])
+    joined_rooms = [room_user.room for room_user in user.user_rooms]
+
+    if request.method == 'POST':
+        if 'create_room' in request.form:
+            room_name = request.form['room_name']
+            room_code = generate_room_code()
+
+            new_room = Room(name=room_name, code=room_code)
+            db.session.add(new_room)
+            db.session.commit()
+
+            room = Room.query.filter_by(code=room_code).first()
+            new_room_user = RoomUser(room_code=room.code, username=user.username)
+            db.session.add(new_room_user)
+            db.session.commit()
+
+            flash(f'Room créée avec le code : {room_code}', 'success')
+            return redirect(url_for('chat', room_code=room_code))
+
+        elif 'join_room' in request.form:
+            room_code = request.form['room_code']
+            room = Room.query.filter_by(code=room_code).first()
+
+            if room:
+                existing_room_user = RoomUser.query.filter_by(room_code=room.code, username=user.username).first()
+                if not existing_room_user:
+                    new_room_user = RoomUser(room_code=room.code, username=user.username)
+                    db.session.add(new_room_user)
+                    db.session.commit()
+                    flash(f'Vous avez rejoint la room avec le code : {room_code}', 'success')
+                else:
+                    flash('Vous avez déjà rejoint cette room', 'info')
+                return redirect(url_for('chat', room_code=room_code))
+            else:
+                flash('Code de room invalide', 'danger')
+
+    return render_template('create_or_join_room.html', joined_rooms=joined_rooms)
+
+
 
 @socketio.on('message')
 def handle_message(data):
