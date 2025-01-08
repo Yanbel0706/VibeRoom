@@ -74,6 +74,7 @@ def signup():
         new_user = User(username=username, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
+        
 
         flash('Inscription réussie ! Vous pouvez vous connecter maintenant.', 'success')
         return redirect(url_for('login'))
@@ -98,6 +99,21 @@ def login():
             flash('Nom d\'utilisateur ou mot de passe incorrect', 'danger')
 
     return render_template('login.html')
+
+@app.route('/chat/<room_code>')
+def chat(room_code):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user = User.query.get(session['user_id'])
+    room = Room.query.filter_by(code=room_code).first()
+
+    if room:
+        messages = Message.query.filter_by(room_id=room.id).all()
+        return render_template('chat.html', room=room, messages=messages)
+    else:
+        flash('Room not found', 'danger')
+        return redirect(url_for('create_or_join_room'))
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
