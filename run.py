@@ -160,7 +160,10 @@ def create_or_join_room():
 
     return render_template('create_or_join_room.html', joined_rooms=joined_rooms)
 
-
+@app.route('/quit_room')
+def quit_room():
+    flash('Vous avez quitté la room', 'info')
+    return redirect(url_for('create_or_join_room'))
 
 @socketio.on('message')
 def handle_message(data):
