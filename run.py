@@ -165,6 +165,13 @@ def quit_room():
     flash('Vous avez quitté la room', 'info')
     return redirect(url_for('create_or_join_room'))
 
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    socketio.emit('message', {'user': 'System', 'message': f'{username} a rejoint la room.'}, room=room)
+
 @socketio.on('message')
 def handle_message(data):
     user = User.query.get(session['user_id'])
