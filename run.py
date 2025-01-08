@@ -172,6 +172,12 @@ def on_join(data):
     join_room(room)
     socketio.emit('message', {'user': 'System', 'message': f'{username} a rejoint la room.'}, room=room)
 
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash('Déconnexion réussie !', 'info')
+    return redirect(url_for('login'))
+
 @socketio.on('message')
 def handle_message(data):
     user = User.query.get(session['user_id'])
