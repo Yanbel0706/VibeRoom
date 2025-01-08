@@ -115,5 +115,21 @@ def chat(room_code):
         flash('Room not found', 'danger')
         return redirect(url_for('create_or_join_room'))
 
+@socketio.on('message')
+def handle_message(data):
+    user = User.query.get(session['user_id'])
+    room = Room.query.filter_by(code=data['room']).first()
+
+    if room:
+        message = Message(user_id=user.id, room_id=room.id, content=data['message'])
+        db.session.add(message)
+        db.session.commit()
+
+        socketio.emit('message', {
+            'user': user.username,
+            'message': data['message'],
+            'timestamp': message.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        }, room=data['room'])
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
