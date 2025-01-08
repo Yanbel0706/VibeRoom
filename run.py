@@ -4,6 +4,8 @@ from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+import random
+import string
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yanbel0706'  # Remplacez par une clé secrète sécurisée
