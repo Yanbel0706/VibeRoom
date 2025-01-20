@@ -72,3 +72,22 @@ Ensure you have the following installed on your machine:
 4. Open your browser and go to http://localhost:5000 to start using the chat app.
    
 
+## Usage
+
+### User Authentication
+Users can sign up with a username and password.
+After logging in, users can either create or join a room by entering a room code.
+Messages are displayed in real-time in the chat room.
+
+### Room Management
+To create a new room, enter a unique room code.
+To join an existing room, use the room code provided by another user.
+Users can send messages to the room, and messages will appear for everyone in real-time.
+
+### Chat Room
+
+Messages from the user appear on the right side of the screen, while messages from other users appear on the left.
+The username of the user is displayed next to their message.
+The date and time of each message is displayed below the message in a smaller font.
+### Logout
+Users can log out at any time, which will redirect them to the login page.
