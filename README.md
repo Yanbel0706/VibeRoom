@@ -97,15 +97,27 @@ Ensure you have the following installed on your machine:
 
 ## Project Structure
 ```
-chat-app/
-├── static/                # Static files (optional, not heavily used)
+VibeRoom/
 ├── templates/             # HTML templates for frontend
 │   ├── login.html         # Login page
 │   ├── signup.html        # Sign-up page
 │   ├── create_or_join_room.html  # Room creation/joining page
-│   └── chat.html          # Chat room page                           
+│   └── chat.html          # Chat room page
+├── instances/             #for the database
+│   ├── chat.db            # the database                         
 ├── run.py                 # Entry point of the application
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
 ```
+
+---
+
+## Testing with SQLite Browser
+You can verify the data in the database using SQLite Browser:
+1. Open the database file `chat.db` in SQLite Browser.
+2. Inspect the `users` table to confirm user registration.
+3. Inspect the `rooms` table to verify created rooms and their participants.
+4. Review the `messages` table to check the saved chat messages.
+
+---
 
