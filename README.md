@@ -39,6 +39,21 @@ This project is a simple real-time chat application that allows users to create 
 
 ---
 
+## Project Structure
+```
+VibeRoom/
+├── templates/             # HTML templates for frontend
+│   ├── login.html         # Login page
+│   ├── signup.html        # Sign-up page
+│   ├── create_or_join_room.html  # Room creation/joining page
+│   └── chat.html          # Chat room page
+├── instances/             #for the database
+│   ├── chat.db            # the database                         
+├── run.py                 # Entry point of the application
+├── requirements.txt       # Python dependencies
+└── README.md              # Project documentation
+```
+
 ## Installation
 
 Follow these steps to get your development environment up and running.
@@ -93,22 +108,6 @@ Ensure you have the following installed on your machine:
    - Click the logout button to log out and return to the login page.
 
 ---
-
-
-## Project Structure
-```
-VibeRoom/
-├── templates/             # HTML templates for frontend
-│   ├── login.html         # Login page
-│   ├── signup.html        # Sign-up page
-│   ├── create_or_join_room.html  # Room creation/joining page
-│   └── chat.html          # Chat room page
-├── instances/             #for the database
-│   ├── chat.db            # the database                         
-├── run.py                 # Entry point of the application
-├── requirements.txt       # Python dependencies
-└── README.md              # Project documentation
-```
 
 ---
 
