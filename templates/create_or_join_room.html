@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Create or join a room</h2>
+    <p>welocome {{ session['user_id'] }}</p>
+
+    <!-- Formulaire de création de room -->
+    <form method="POST">
+        <h3>Create a room</h3>
+        <div>
+            <label for="room_name">Name of room :</label>
+            <input type="text" id="room_name" name="room_name" required>
+        </div>
+        <button type="submit" name="create_room">Create the room</button>
+    </form>
+
+    <!-- Formulaire de rejoindre une room -->
+    <form method="POST">
+        <h3>join room</h3>
+        <div>
+            <label for="room_code">Code of  room :</label>
+            <input type="text" id="room_code" name="room_code" required>
+        </div>
+        <button type="submit" name="join_room">join room</button>
+    </form>
+
+    <h3>Rooms already joined :</h3>
+    <div style="display: inline-block;">
+        {% for room in joined_rooms %}
+            <form method="POST" action="{{ url_for('chat', room_code=room.code) }}">
+                <button type="submit">{{ room.code }}</button>
+            </form>
+        {% else %}
+            <p>you don't join any room yet.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Bouton de déconnexion à côté des rooms -->
+    <form action="{{ url_for('logout') }}" method="GET" style="display: inline-block; margin-left: 10px;">
+        <button type="submit">Logout</button>
+    </form>
+
+{% endblock %}
