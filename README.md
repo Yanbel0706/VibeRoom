@@ -71,6 +71,7 @@ Ensure you have the following installed on your machine:
    ```
 4. Open your browser and go to http://localhost:5000 to start using the chat app.
    
+---
 
 ## Usage Guide
 1. **Sign Up**:
@@ -90,4 +91,21 @@ Ensure you have the following installed on your machine:
 
 6. **logout**:
    - Click the logout button to log out and return to the login page.
+
 ---
+
+
+## Project Structure
+```
+chat-app/
+├── static/                # Static files (optional, not heavily used)
+├── templates/             # HTML templates for frontend
+│   ├── login.html         # Login page
+│   ├── signup.html        # Sign-up page
+│   ├── create_or_join_room.html  # Room creation/joining page
+│   └── chat.html          # Chat room page                           
+├── run.py                 # Entry point of the application
+├── requirements.txt       # Python dependencies
+└── README.md              # Project documentation
+```
+
