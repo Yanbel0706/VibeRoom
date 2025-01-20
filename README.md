@@ -121,3 +121,23 @@ You can verify the data in the database using SQLite Browser:
 
 ---
 
+## Challenges and Solutions
+1. **Real-Time Communication**:
+   - Challenge: Implementing instant updates for multiple users.
+   - Solution: Used Socket.IO for reliable real-time messaging.
+
+2. **User Session Management**:
+   - Challenge: Ensuring unique user sessions.
+   - Solution: Incorporated Flask sessions to maintain user state.
+
+---
+
+## Future Enhancements
+1. **Private Messaging**: Allow users to send direct messages to specific participants.
+2. **Enhanced UI/UX**: Improve the frontend design for better usability.
+3. **User Profiles**: Add support for profile pictures and bios.
+
+---
+
+## License
+This project is licensed under the MIT License.
