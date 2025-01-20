@@ -140,4 +140,4 @@ You can verify the data in the database using SQLite Browser:
 ---
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
