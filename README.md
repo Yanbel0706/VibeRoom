@@ -22,6 +22,33 @@ This project is a simple real-time chat application that allows users to create 
    - Users can leave a room and join another seamlessly.
 
 5. **Database Management**:
-   - SQLite is used to store user and room data efficiently.
+   - SQLite used to store user and room data efficiently.
+---
 
+## Technologies Used
+- **Backend**:
+  - Flask: web framework for Python.
+  - Flask-SQLAlchemy: For ORM-based database management.
+  - Socket.IO: For handling real-time communication.
+
+- **Frontend**:
+  - HTML: simple and functional user interface.
+
+- **Database**:
+  - SQLite:  for storing user and chat room data.
+
+---
+
+## Installation
+
+Follow these steps to get your development environment up and running.
+
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+
+- Python 3.x
+- Flask
+- Flask-SocketIO
+- SQL database (such as SQLite, MySQL, or PostgreSQL)
 ---
