@@ -52,3 +52,23 @@ Ensure you have the following installed on your machine:
 - Flask-SocketIO
 - SQL database (such as SQLite, MySQL, or PostgreSQL)
 ---
+
+### Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yanbel0706/VibeRoom.git
+   cd VibeRoom
+   ```
+ 2. Install the required dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the Application
+   ```bash
+   Python run.py
+   ```
+4. Open your browser and go to http://localhost:5000 to start using the chat app.
+   
+
